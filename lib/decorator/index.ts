@@ -1,3 +1,4 @@
 import required = require('./required');
+import assert = require('./assert');
 
-export = { required };
+export = { required, assert };
