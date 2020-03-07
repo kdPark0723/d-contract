@@ -1,5 +1,5 @@
-import validate = require("../lib/validate");
-import required = require("../lib/decorator/required");
+import dbc = require('../lib');
+const { validate, required } = dbc;
 
 class A {
   @validate
@@ -10,4 +10,4 @@ class A {
 
 const a = new A();
 a.f(undefined);
-a.f("aa");
+a.f('aa');

@@ -1,10 +1,11 @@
 {
-  "name": "node-dbc",
-  "version": "1.0.0",
+  "name": "ts-dbc",
+  "version": "0.0.0",
   "description": "",
   "main": "lib",
   "scripts": {
-    "lint": "eslint '**/*.{ts}' --quiet --fix",
+    "prepare": "tsc",
+    "lint": "eslint '**/*.js' --quiet --fix && eslint '**/*.ts' --quiet --fix",
     "build": "tsc",
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
