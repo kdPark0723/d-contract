@@ -2,7 +2,7 @@ import dbc = require('../lib');
 const { validate, required } = dbc;
 
 class Converter {
-  @validate((result) => !isNaN(result))
+  @validate((result) => typeof result === 'number')
   toNumber(@required((numeric) => !isNaN(numeric)) numeric: string) {
     return Number(numeric);
   }
