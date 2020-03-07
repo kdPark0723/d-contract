@@ -17,6 +17,6 @@ export = function (callback: (param: any, info: ParameterInfo) => boolean = null
   if (!callback && !message) return defaultRequired;
 
   const key = new RequiredKey(callback, message);
-  if (!requiredMap.has(key)) return requiredMap.set(key, assert(callback, message));
+  if (!requiredMap.has(key)) requiredMap.set(key, assert(callback, message));
   return requiredMap.get(key);
 };

@@ -1,13 +1,13 @@
 import dbc = require('../lib');
 const { validate, required } = dbc;
 
-class A {
-  @validate()
-  f(@required() a: string) {
-    console.log(a);
+class Converter {
+  @validate((result) => !isNaN(result))
+  toNumber(@required((numeric) => !isNaN(numeric)) numeric: string) {
+    return Number(numeric);
   }
 }
 
-const a = new A();
-a.f(undefined);
-a.f('aa');
+const converter = new Converter();
+console.log(converter.toNumber('1213'));
+console.log(converter.toNumber('aaa'));

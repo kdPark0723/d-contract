@@ -23,7 +23,7 @@ async function runAndValidatePromise(promise: Promise<any>, validate: (result: a
 }
 
 function validate(postCondition: (result: any) => boolean = null, message: string = undefined) {
-  return function (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
+  return (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) => {
     const method = descriptor.value;
     descriptor.value = function () {
       const metadataKeys: IterableIterator<any> = decoratorKeys.keys();
@@ -54,6 +54,6 @@ export = function (postCondition: (result: any) => boolean = null, message: stri
   if (!postCondition && !message) return defaultValidate;
 
   const key = new ValidateKey(postCondition, message);
-  if (!validateMap.has(key)) return validateMap.set(key, validate(postCondition, message));
+  if (!validateMap.has(key)) validateMap.set(key, validate(postCondition, message));
   return validateMap.get(key);
 };
