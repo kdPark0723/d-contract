@@ -1,42 +1,48 @@
 import 'reflect-metadata';
+
 import assert = require('assert');
 
 import decoratorKeys = require('../decorator/decorator-keys');
-import ParameterDecoratorCallback = require('../parameter/parameter-decorator-callback');
-import ValidateKey = require("./validate-key");
-import runAndValidatePromise = require("./run-and-validate-promise");
+import ValidateKey = require('./validate-key');
+import runAndValidatePromise = require('./run-and-validate-promise');
 
 const validateMap = new Map();
 
 function validate(postCondition: (result: any) => boolean = null, message: string = undefined) {
   return (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) => {
     const method = descriptor.value;
-    descriptor.value = function () {
+    // eslint-disable-next-line no-param-reassign
+    descriptor.value = () => {
       const metadataKeys: IterableIterator<any> = decoratorKeys.keys();
+      // eslint-disable-next-line no-restricted-syntax
       for (const key of metadataKeys) {
-        const ParameterDecoratorCallbacks: ParameterDecoratorCallback[] = Reflect.getOwnMetadata(key, target, propertyName);
+        const ParameterDecoratorCallbacks = Reflect.getOwnMetadata(key, target, propertyName);
 
         if (ParameterDecoratorCallbacks) {
+          // eslint-disable-next-line no-restricted-syntax
           for (const callbackInfo of ParameterDecoratorCallbacks) {
+            // eslint-disable-next-line prefer-rest-params
             callbackInfo.callback(arguments[callbackInfo.info.index], callbackInfo.info);
           }
         }
       }
 
+      // eslint-disable-next-line prefer-rest-params
       let result = method.apply(this, arguments);
       if (postCondition) {
-        if (result instanceof Promise) result = runAndValidatePromise(result, postCondition, message);
-        else assert(postCondition(result), message);
+        if (result instanceof Promise) {
+          result = runAndValidatePromise(result, postCondition, message);
+        } else assert(postCondition(result), message);
       }
 
       return result;
     };
-  }
+  };
 }
 
 const defaultValidate = validate();
 
-export = function (postCondition: (result: any) => boolean = null, message: string = undefined) {
+export = (postCondition: (result: any) => boolean = null, message: string = undefined) => {
   if (!postCondition && !message) return defaultValidate;
 
   const key = new ValidateKey(postCondition, message);

@@ -1,7 +1,6 @@
-import ParameterInfo = require('./parameter-info');
+// eslint-disable-next-line no-unused-vars
+import { ParameterInfo } from './parameter-info';
 
-interface ParameterDecoratorCallback {
+export interface ParameterDecoratorCallback {
   info: ParameterInfo, callback: (param: any, info: ParameterInfo) => any
 }
-
-export = ParameterDecoratorCallback;

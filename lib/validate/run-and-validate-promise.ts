@@ -1,10 +1,10 @@
 import assert = require('assert');
 
-export = async function runAndValidatePromise<T>(
-  promise: Promise<T>,
-  validate: (result: T) => boolean = null,
-  message: string = undefined
-): Promise<T> {
+export = async (
+  promise: Promise<any>,
+  validate: (result: any) => boolean = null,
+  message: string = undefined,
+): Promise<any> => {
   if (!validate) return promise;
 
   const result = await promise;

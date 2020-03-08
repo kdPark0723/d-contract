@@ -1,19 +1,15 @@
+// eslint-disable-next-line no-unused-vars
+import { ParameterInfo } from '../parameter/parameter-info';
+
 import assert = require('./assert');
-import ParameterInfo = require("../parameter/parameter-info");
+import RequiredKey = require('./required-key');
 
 const requiredMap = new Map();
 
-class RequiredKey {
-  constructor(
-    public callback: (param: any, info: ParameterInfo) => boolean,
-    public message: string
-  ) {
-  }
-}
-
 const defaultRequired = assert((param) => param !== undefined, 'Parameter Required.');
 
-export = function (callback: (param: any, info: ParameterInfo) => boolean = null, message: string = undefined) {
+// eslint-disable-next-line max-len
+export = (callback: (param: any, info: ParameterInfo) => boolean = null, message: string = undefined) => {
   if (!callback && !message) return defaultRequired;
 
   const key = new RequiredKey(callback, message);
