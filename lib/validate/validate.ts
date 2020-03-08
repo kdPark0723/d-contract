@@ -11,8 +11,8 @@ const validateMap = new Map();
 function validate(postCondition: (result: any) => boolean = null, message: string = undefined) {
   return (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) => {
     const method = descriptor.value;
-    // eslint-disable-next-line no-param-reassign
-    descriptor.value = () => {
+    // eslint-disable-next-line no-param-reassign,func-names
+    descriptor.value = function () {
       const metadataKeys: IterableIterator<any> = decoratorKeys.keys();
       // eslint-disable-next-line no-restricted-syntax
       for (const key of metadataKeys) {

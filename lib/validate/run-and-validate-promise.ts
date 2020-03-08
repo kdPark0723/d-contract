@@ -1,7 +1,7 @@
 import assert = require('assert');
 
 export = async (
-  promise: Promise<any>,
+  promise,
   validate: (result: any) => boolean = null,
   message: string = undefined,
 ): Promise<any> => {

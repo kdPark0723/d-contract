@@ -1,6 +1,6 @@
 {
   "name": "d-contract",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "For Support, Design by Contract(DBC).",
   "main": "lib",
   "scripts": {
