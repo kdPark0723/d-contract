@@ -1,26 +1,12 @@
 import 'reflect-metadata';
 import assert = require('assert');
 
-import decoratorKeys = require('./decorator/decorator-keys');
-import ParameterDecoratorCallback = require('./parameter/parameter-decorator-callback');
+import decoratorKeys = require('../decorator/decorator-keys');
+import ParameterDecoratorCallback = require('../parameter/parameter-decorator-callback');
+import ValidateKey = require("./validate-key");
+import runAndValidatePromise = require("./run-and-validate-promise");
 
 const validateMap = new Map();
-
-class ValidateKey {
-  constructor(
-    public callback: (result: any) => boolean,
-    public message: string
-  ) {
-  }
-}
-
-async function runAndValidatePromise(promise: Promise<any>, validate: (result: any) => boolean = null, message: string = undefined): Promise<any> {
-  if (!validate) return promise;
-
-  const result = await promise;
-  assert(validate(result), message);
-  return result;
-}
 
 function validate(postCondition: (result: any) => boolean = null, message: string = undefined) {
   return (target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) => {

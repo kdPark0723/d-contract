@@ -1,5 +1,5 @@
-import dbc = require('../lib');
-const { validate, required } = dbc;
+import dContract = require('../lib');
+const { validate, required } = dContract;
 
 class Converter {
   @validate((result) => typeof result === 'number')

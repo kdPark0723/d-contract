@@ -1,15 +1,14 @@
 {
-  "name": "ts-dbc",
-  "version": "0.0.0",
-  "description": "",
+  "name": "d-contract",
+  "version": "1.0.1",
+  "description": "For Support, Design by Contract(DBC).",
   "main": "lib",
   "scripts": {
-    "prepare": "tsc",
+    "prepare": "npm run build",
     "lint": "eslint '**/*.js' --quiet --fix && eslint '**/*.ts' --quiet --fix",
-    "build": "tsc",
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "build": "tsc"
   },
-  "keywords": [],
+  "keywords": ["contract", "design", "validation"],
   "author": "Si-Yual Park",
   "license": "MIT",
   "files": [
