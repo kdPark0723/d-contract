@@ -9,7 +9,7 @@ const requiredMap = new Map();
 const defaultRequired = assert((param) => param !== undefined, 'Parameter Required.');
 
 // eslint-disable-next-line max-len
-export = (callback: (param: any, info: ParameterInfo) => boolean = null, message: string = undefined) => {
+export = function required(callback: (param: any, info: ParameterInfo) => boolean = null, message: string = undefined) {
   if (!callback && !message) return defaultRequired;
 
   const key = new RequiredKey(callback, message);

@@ -1,8 +1,11 @@
 import dContract = require('../lib');
-const { validate, required } = dContract;
+const {
+  validate, required, validateResponseType, responseType,
+} = dContract;
 
 class Converter {
-  @validate((result) => typeof result === 'number')
+  @validate(validateResponseType)
+  @responseType(Number)
   // eslint-disable-next-line class-methods-use-this,no-restricted-globals
   toNumber(@required((numeric) => !isNaN(numeric)) numeric: string): number {
     return Number(numeric);
@@ -12,5 +15,5 @@ class Converter {
 const converter = new Converter();
 // eslint-disable-next-line no-console
 console.log(converter.toNumber('1213'));
+// eslint-disable-next-line no-console
 console.log(converter.toNumber('aaaa'));
-

@@ -1,3 +1,3 @@
-import validate = require('./validate');
+import validate = require('./validate-factory');
 
 export = { validate };

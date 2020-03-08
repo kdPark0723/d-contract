@@ -10,10 +10,10 @@ For Support, Design by Contract(DBC)
 
 ```typescript
 import dContract = require('d-contract');
-const { validate, required } = dContract;
+const { validateFactory, required } = dContract;
 
 class Converter {
-  @validate((result) => typeof result === 'number')
+  @validateFactory((result) => typeof result === 'number')
   toNumber(@required((numeric) => !isNaN(numeric)) numeric: string) {
     return Number(numeric);
   }
